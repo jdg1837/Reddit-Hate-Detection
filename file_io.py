@@ -28,4 +28,4 @@ def read_parameters(filename):
 def write_to_txt(data,filename):
     with open(filename, 'w',encoding='utf-8') as f:
         for datum in data:
-            f.write('%s\n',datum)
+            f.write(datum)

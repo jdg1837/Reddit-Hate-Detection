@@ -11,7 +11,6 @@ method, subreddits, start, end, fields, k =  file_io.read_parameters(param_file)
 
 program_start = int(time.time())
 
-users = []
 count = []
 
 for sub in subreddits:
@@ -24,7 +23,7 @@ for sub in subreddits:
         if (method=="count" and sub_count >= k*1000) or (method=="time" and epoch <= end):
             break
 
-        epoch, count_curr = Reddit.request_data(sub,500,fields,epoch,sub_count==0,users)
+        epoch, count_curr = Reddit.request_data(sub,500,fields,epoch,sub_count==0)
 
         if count_curr == -1:
             break
@@ -33,8 +32,7 @@ for sub in subreddits:
 
     count.append(sub+','+str(sub_count))
 
-file_io.write_to_txt(count,'comment_count.txt')
-file_io.write_to_txt(users,'users.txt')
+#file_io.write_to_txt(count,'comment_count.txt')
 
 program_end = int(time.time())
 

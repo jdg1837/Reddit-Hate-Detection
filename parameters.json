@@ -1,8 +1,8 @@
 {
     "subs": ["Gaming","LeagueOfLegends","Overwatch","Minecraft","Games","television","movies","rickandmorty","gameofthrones","freefolk","StarWars","comicbooks","marvelstudios","Marvel","DCcomics","batman","horror"],
-    "method": "count",
-    "start": 0,
-    "end": 0,
+    "method": "time",
+    "start": 1585717199,
+    "end": 1583042400,
     "fields": "body,author,score,permalink,created_utc",
-    "k": 250,
+    "k": 250
 }

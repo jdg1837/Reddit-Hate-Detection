@@ -23,7 +23,7 @@ def set_output_file(filename):
 def read_parameters(filename):
     with open(filename, 'r+', encoding='utf-8') as f:    
         data = json.load(f)
-    return data["subs"],int(data["start"]),int(data["end"]),data["fields"],int(data["k"]),int(data["count"])
+    return data["method"],data["subs"],int(data["start"]),int(data["end"]),data["fields"],int(data["k"])
 
 def write_to_txt(data,filename):
     with open(filename, 'w',encoding='utf-8') as f:

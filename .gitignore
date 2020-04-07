@@ -1,5 +1,3 @@
-parameters.json
-*.txt
 *.pyc
 *data*
 *.zip

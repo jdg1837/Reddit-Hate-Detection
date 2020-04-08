@@ -11,8 +11,6 @@ method, subreddits, start, end, fields, k =  file_io.read_parameters(param_file)
 
 program_start = int(time.time())
 
-count = []
-
 for sub in subreddits:
     sub_count = 0
     epoch = start
@@ -30,10 +28,6 @@ for sub in subreddits:
         else:
             sub_count += count_curr
 
-    count.append(sub+','+str(sub_count))
-
-#file_io.write_to_txt(count,'comment_count.txt')
-
 program_end = int(time.time())
 
-print("%d\n", program_end - program_start)
+print("%s\n", program_end - program_start)

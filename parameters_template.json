@@ -1,8 +1,11 @@
 {
     "subs": ["comicbooks","marvelstudios"],
-    "method": "time",
+    "method": "count",
     "start": 1585717199,
     "end": 1583042400,
     "fields": "body,author,score,permalink,created_utc",
-    "k": 250
+    "k": 101,
+    "src": "100k_data",
+    "dst": "101k_data",
+    "extend": true
 }

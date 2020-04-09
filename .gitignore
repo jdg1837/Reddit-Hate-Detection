@@ -1,4 +1,4 @@
 *.pyc
 *data*
 *.zip
-*.json
+parameters.json

@@ -7,15 +7,21 @@ if len(sys.argv) < 2:
     print("Please include parameter file")
 param_file = sys.argv[1]
 
-method, subreddits, start, end, fields, k =  file_io.read_parameters(param_file)
+method, subreddits, start, end, fields, k, src, dst, extend =  file_io.read_parameters(param_file)
+
+# if extend:
+#     prev_values = file_io.load_values(src)
 
 program_start = int(time.time())
 
 for sub in subreddits:
     sub_count = 0
     epoch = start
-    output_file = sub.lower() + '_data.json'
+    output_file = dst + '/' + dst + '_' +sub.lower() + '_data.json'
     file_io.set_output_file(output_file)
+
+    if extend:
+        epoch, sub_count = file_io.extract_data(sub,src)
 
     while True:
         if (method=="count" and sub_count >= k*1000) or (method=="time" and epoch <= end):
@@ -30,4 +36,4 @@ for sub in subreddits:
 
 program_end = int(time.time())
 
-print("%s\n", program_end - program_start)
+print(program_end - program_start)

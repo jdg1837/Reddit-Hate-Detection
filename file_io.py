@@ -7,7 +7,7 @@ def write(data):
         json.dump(data, f, ensure_ascii=False, indent=4)
 
 def read(filename):
-    with open(output_file, 'r+', encoding='utf-8') as f:    
+    with open(filename, 'r+', encoding='utf-8') as f:    
         old_data = json.load(f)
     return old_data
 
@@ -16,6 +16,27 @@ def update(new_data):
     data["data"] += new_data["data"]
     return data
 
+def extract_data(sub,src):
+    src_file = src + '/' + sub + '_' + src + '.json'
+    old_data = read(src_file)
+    epoch = old_data["data"][-1]["created_utc"]
+    count = len(old_data["data"])
+    write(old_data)
+    return epoch, count
+
+# def load_values(src):
+#     count_file = src + '/' + src + '_count.txt'
+#     with open(count_file, 'r+', encoding='utf-8') as f:    
+#         count_data = f.readlines()
+#     prev_count = {}
+#     for i in range(len(count_data)-1):
+#         line = count_data[i]
+#         values = line.split(',')
+#         sub = values[0]
+#         curr_count = int(values[1].strip())
+#         prev_count[sub] = curr_count
+#     return prev_count
+
 def set_output_file(filename):
     global output_file
     output_file = filename
@@ -23,7 +44,7 @@ def set_output_file(filename):
 def read_parameters(filename):
     with open(filename, 'r+', encoding='utf-8') as f:    
         data = json.load(f)
-    return data["method"],data["subs"],int(data["start"]),int(data["end"]),data["fields"],int(data["k"])
+    return data["method"],data["subs"],int(data["start"]),int(data["end"]),data["fields"],int(data["k"]),data["src"],data["dst"],bool(data["extend"])
 
 def write_to_txt(data,filename):
     with open(filename, 'w',encoding='utf-8') as f:

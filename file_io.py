@@ -24,19 +24,6 @@ def extract_data(sub,src):
     write(old_data)
     return epoch, count
 
-# def load_values(src):
-#     count_file = src + '/' + src + '_count.txt'
-#     with open(count_file, 'r+', encoding='utf-8') as f:    
-#         count_data = f.readlines()
-#     prev_count = {}
-#     for i in range(len(count_data)-1):
-#         line = count_data[i]
-#         values = line.split(',')
-#         sub = values[0]
-#         curr_count = int(values[1].strip())
-#         prev_count[sub] = curr_count
-#     return prev_count
-
 def set_output_file(filename):
     global output_file
     output_file = filename

@@ -17,7 +17,7 @@ program_start = int(time.time())
 for sub in subreddits:
     sub_count = 0
     epoch = start
-    output_file = dst + '/' + dst + '_' +sub.lower() + '_data.json'
+    output_file = dst + '/' + sub.lower() + '_' + dst + '.json'
     file_io.set_output_file(output_file)
 
     if extend:

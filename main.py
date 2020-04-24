@@ -9,9 +9,6 @@ param_file = sys.argv[1]
 
 method, subreddits, start, end, fields, k, src, dst, extend =  file_io.read_parameters(param_file)
 
-# if extend:
-#     prev_values = file_io.load_values(src)
-
 program_start = int(time.time())
 
 for sub in subreddits:

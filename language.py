@@ -1,11 +1,12 @@
 from googleapiclient import discovery
 from langdetect import detect
+import file_io
 import json
 
-API_KEY='AIzaSyBU9qBYpaMC3-RDxUeKwJmGzfAJ-bC0yow'
+API_KEY=''
 
 #Generates API client object dynamically based on service name and version.
-service = discovery.build('commentanalyzer', 'v1alpha1', developerKey=API_KEY)
+service = None
 
 def is_english(comment):
     try:
@@ -19,8 +20,17 @@ def get_toxicity(comment):
             'comment': {'text': comment },
             'requestedAttributes': {'SEVERE_TOXICITY': {}}
         }
-        response = service.comments().analyze(body=analyze_request).execute()
+        try:
+            response = service.comments().analyze(body=analyze_request).execute()
+        except:
+            return -1
+            
         jr = json.dumps(response, indent=2)
         x = json.loads(jr)
         score = x['attributeScores']['SEVERE_TOXICITY']['summaryScore']['value']
         return score
+
+def set_API_key(filename):
+    global service
+    API_KEY = file_io.read_txt(filename)
+    service = discovery.build('commentanalyzer', 'v1alpha1', developerKey=API_KEY)

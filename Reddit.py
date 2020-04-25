@@ -2,6 +2,7 @@ import file_io
 import requests
 import time
 import json
+import praw
 
 def url_request(url):
     try:
@@ -28,3 +29,11 @@ def request_data(sub, size, fields, epoch, initial):
     file_io.write(data)
     
     return epoch, obj_num
+
+def get_user_karma(u):
+    userAgent = 'test'
+    clientId = 'IT6Gc73BtGDJwg'
+    clientSecret = 'fWgdfjr2gDdTX5YNo1jKZZqiRAo'
+    r = praw.Reddit(user_agent=userAgent, client_id=clientId, client_secret=clientSecret)
+    user = r.redditor(u)
+    return user.link_karma, user.comment_karma

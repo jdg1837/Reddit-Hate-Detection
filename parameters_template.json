@@ -4,8 +4,8 @@
     "start": 1585717199,
     "end": 1583042400,
     "fields": "body,author,score,permalink,created_utc",
-    "k": 101,
-    "src": "100k_data",
-    "dst": "101k_data",
-    "extend": true
+    "k": 250,
+    "src": "250k_data",
+    "dst": "250k_data_toxicity",
+    "extend": false
 }

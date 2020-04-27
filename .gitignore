@@ -1,5 +1,5 @@
 *.pyc
 *data*
 *.zip
-parameters.json
+parameters*.json
 API_KEY*.txt

@@ -1,6 +1,7 @@
 import language
 import file_io
 import time
+import file_io
 import json
 import sys
 
@@ -27,7 +28,14 @@ for sub in subreddits:
     d = 0 #number of succesful api calls
     st = 0
     end = len(comment_data)
+
+    if ext:
+        old_data = file_io.read(output_file)
+        sub_data = old_data['data']
+        st = len(sub_data)
+
     t1 = int(time.time())
+
     for i in range(st,end):
         datum = comment_data[i]
         comment = datum['body']
@@ -53,12 +61,15 @@ for sub in subreddits:
 
         d += 1
 
-        if d % 1000 == 0:
+        if d % 5000 == 0:
             data = {'data': sub_data}
             file_io.write(data)
 
         if d == k:
             break
+
+    data = {'data': sub_data}
+    file_io.write(data)
 
 program_end = int(time.time())
 

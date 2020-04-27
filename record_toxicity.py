@@ -61,7 +61,7 @@ for sub in subreddits:
 
         d += 1
 
-        if d % 5000 == 0:
+        if d % 10000 == 0:
             data = {'data': sub_data}
             file_io.write(data)
 

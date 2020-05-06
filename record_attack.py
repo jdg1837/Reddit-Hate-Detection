@@ -13,8 +13,7 @@ key_file = sys.argv[2]
 program_start = int(time.time())
 
 subreddits =  file_io.read_parameters(param_file)[1]
-k, src, dst, ext = file_io.read_parameters(param_file)[5:]
-k = k*1000
+src, dst = file_io.read_parameters(param_file)[6:8]
 language.set_API_key(key_file)
 
 for sub in subreddits:
@@ -29,23 +28,12 @@ for sub in subreddits:
     st = 0
     end = len(comment_data)
 
-    if ext:
-        old_data = file_io.read(output_file)
-        sub_data = old_data['data']
-        last_record = sub_data[-1]
-        for j in range(k):
-            if comment_data[j]['permalink'] == last_record['permalink']:
-                st = j + 1
-
     t1 = int(time.time())
 
     for i in range(st,end):
         datum = comment_data[i]
         comment = datum['body']
-        if comment == '[removed]' or not language.is_english(comment):
-            continue
-
-        score = language.get_toxicity(comment, 'SEVERE_TOXICITY')
+        score = language.get_toxicity(comment, 'IDENTITY_ATTACK')
         c += 1
 
         if c == 600:
@@ -59,17 +47,14 @@ for sub in subreddits:
         if score < 0:
             continue
 
-        datum['toxicity'] = score
+        datum['identity'] = score
         sub_data.append(datum)
 
         d += 1
 
-        if d % 10000 == 0:
+        if d % 1000 == 0:
             data = {'data': sub_data}
             file_io.write(data)
-
-        if d == k:
-            break
 
     data = {'data': sub_data}
     file_io.write(data)

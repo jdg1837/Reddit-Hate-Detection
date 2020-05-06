@@ -15,10 +15,10 @@ def is_english(comment):
     except:
         return False
 
-def get_toxicity(comment):
+def get_toxicity(comment, query):
         analyze_request = {
             'comment': {'text': comment },
-            'requestedAttributes': {'SEVERE_TOXICITY': {}}
+            'requestedAttributes': {query: {}}
         }
         try:
             response = service.comments().analyze(body=analyze_request).execute()
@@ -27,7 +27,7 @@ def get_toxicity(comment):
             
         jr = json.dumps(response, indent=2)
         x = json.loads(jr)
-        score = x['attributeScores']['SEVERE_TOXICITY']['summaryScore']['value']
+        score = x['attributeScores'][query]['summaryScore']['value']
         return score
 
 def set_API_key(filename):

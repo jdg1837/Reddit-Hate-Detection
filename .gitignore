@@ -3,3 +3,4 @@
 *.zip
 parameters*.json
 API_KEY*.txt
+test*

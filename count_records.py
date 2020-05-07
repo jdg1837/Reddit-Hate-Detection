@@ -1,23 +1,24 @@
+import file_io
 import sys
 import os 
 
-if len(sys.argv) < 3:
-    print("Please include directory name and size of packets")
-directory = sys.argv[1]
-n = int(sys.argv[2])
+if len(sys.argv) < 2:
+    print("Please include parameter file and API file")
+param_file = sys.argv[1]
+
+subreddits = file_io.read_parameters(param_file)[1]
+src = file_io.read_parameters(param_file)[6]
 
 comment_count = []
 
-for filename in os.listdir(directory):
-    if filename == directory + '_count.txt':
-        continue
-    with open(directory + '/' + filename, 'r', encoding="utf8") as f:
+for sub in subreddits:
+    word_count = {}
+    input_file = src + '/' + sub.lower() + '_' + src + '_comments.txt'
+    with open(input_file, 'r', encoding="utf8") as f:
         lines = f.readlines()
-        count = int((len(lines)-4)/n)
-
-    sub = filename.split('_')[0]
+        count = int((len(lines)))
 
     comment_count.append("{:15s}{:10,d}\n".format(sub,count))
     
-with open(directory + '/' + directory + '_count.txt', 'w', encoding="utf8") as f:
+with open(src + '/' + src + '_count.txt', 'w', encoding="utf8") as f:
     f.writelines(comment_count)

@@ -1,3 +1,4 @@
+import os
 import json
 
 output_file = 'out.json'
@@ -41,3 +42,25 @@ def write_to_txt(data,filename):
 def read_txt(filename):
     with open(filename, 'r',encoding='utf-8') as f:
         return f.read()
+
+def load_dict(filename):
+    syn = {}
+    data = []
+    with open(filename, 'r',encoding='utf-8') as f:
+        data = f.readlines()
+    for pair in data:
+        pair = pair.split(',')
+        syn[pair[0]] = pair[1].strip()
+    return syn
+
+def load_slurs(directory):
+    slurs = {}
+    for filename in os.listdir(directory):
+        attack_type = filename.split('.')[0]
+        filename = directory + '/' + filename
+        with open(filename,'r') as f:
+            words = f.readlines()
+        for w in words:
+            w = w.strip()
+            slurs[w] = attack_type
+    return slurs

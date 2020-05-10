@@ -1,6 +1,7 @@
 *.pyc
 *data*
 *.zip
+*.xlsx
 parameters*.json
 API_KEY*.txt
 test*

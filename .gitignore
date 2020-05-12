@@ -2,6 +2,7 @@
 *data*
 *.zip
 *.xlsx
+*.csv
 parameters*.json
 API_KEY*.txt
 test*
